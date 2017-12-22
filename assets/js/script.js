@@ -104,7 +104,6 @@
             const mem = new Memory();
             if (e.target.classList.contains('delete')) {
                 const target = e.target.parentNode.parentNode.children;
-                console.log(target);
                 const bookToDelete = {
                     title: target[0].textContent,
                     author: target[1].textContent,
