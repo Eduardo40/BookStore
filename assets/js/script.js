@@ -133,6 +133,7 @@
     }
 
     const ui = new UI();
+    const mem = new Memory();
     ui.displayBooks();
 
     //eventListenrs
