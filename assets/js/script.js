@@ -88,7 +88,7 @@
                 return true;
             }
             if (!showAlert) {
-                this.notify('Plesae check inputs.', 'red');
+                this.notify('Please check inputs.', 'red');
             }
             return false;
         }
