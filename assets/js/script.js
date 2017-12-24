@@ -79,7 +79,7 @@
                 }
                 book.delete = 'Delete';
                 const td = document.createElement('td');
-                td.innerHTML = `<a href="#" class='delete'>${book.delete}</a>`
+                td.innerHTML = `<a href="#" class='delete'>${book.delete}</a>`;
                 tr.appendChild(td);
                 UITable.appendChild(tr);
                 if (!showAlert) {
