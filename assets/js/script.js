@@ -42,8 +42,8 @@
             localStorage.setItem('books', JSON.stringify(this.books));
         }
 
-        static deleteFromMemory(book) {
-            const filtredOut = this.books.filter(_book => _book.isbn !== book.isbn);
+        static deleteFromMemory(isbn) {
+            const filtredOut = this.books.filter(_book => _book.isbn !== isbn);
             this.books = filtredOut;
             localStorage.setItem('books', JSON.stringify(this.books));
 
@@ -99,10 +99,7 @@
             if (e.target.classList.contains('delete')) {
                 const target = e.target.parentNode.parentNode.children;
                 const bookToDelete = {
-                    title: target[0].textContent,
-                    author: target[1].textContent,
                     isbn: target[2].textContent,
-                    delete: target[3].textContent
                 }
                 Storage.deleteFromMemory(bookToDelete);
                 e.target.parentNode.parentNode.remove();
