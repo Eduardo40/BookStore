@@ -29,35 +29,31 @@
         }
     }
 
-    class Memory {
-        constructor() {
-            this.checkLocalStoarage();
-        }
-
-        getBooks() {
+    class Storage {
+        constructor() { }
+        
+        static getBooks() {
+            Storage.checkLocalStoarage();
             return this.books;
         }
 
-        addBookToMemory(book) {
+        static addBookToMemory(book) {
             this.books.push(book);
-            console.log(this.books);
             localStorage.setItem('books', JSON.stringify(this.books));
         }
 
-        deleteFromMemory(book) {
+        static deleteFromMemory(book) {
             const filtredOut = this.books.filter(_book => _book.isbn !== book.isbn);
             this.books = filtredOut;
             localStorage.setItem('books', JSON.stringify(this.books));
 
         }
 
-        checkLocalStoarage() {
+        static checkLocalStoarage() {
             if (localStorage.getItem('books')) {
-                this.books = JSON.parse(localStorage.getItem('books'));
-                return true;
+                return this.books = JSON.parse(localStorage.getItem('books'));
             } else {
-                this.books = [];
-                return false;
+                return this.books = [];
             }
         }
     }
@@ -93,15 +89,13 @@
             return false;
         }
         displayBooks() {
-            const mem = new Memory();
-            const books = mem.getBooks();
+            const books = Storage.getBooks();
             books.forEach((book) => {
                 this.addToList(book, true);
             })
         }
 
         deleteFromList(e) {
-            const mem = new Memory();
             if (e.target.classList.contains('delete')) {
                 const target = e.target.parentNode.parentNode.children;
                 const bookToDelete = {
@@ -110,7 +104,7 @@
                     isbn: target[2].textContent,
                     delete: target[3].textContent
                 }
-                mem.deleteFromMemory(bookToDelete);
+                Storage.deleteFromMemory(bookToDelete);
                 e.target.parentNode.parentNode.remove();
                 ui.notify('Deleted!', "green"); // because this is for event listener.
             }
@@ -132,7 +126,6 @@
     }
 
     const ui = new UI();
-    const mem = new Memory();
     ui.displayBooks();
 
     //eventListenrs
@@ -153,7 +146,7 @@
             isbn
         }
         if (ui.addToList(book)) {
-            mem.addBookToMemory(book);
+            Storage.addBookToMemory(book);
             this.reset();
         }
     }
